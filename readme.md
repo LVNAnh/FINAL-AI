@@ -87,6 +87,7 @@ docker run -p 5000:5000 -e HUGGING_FACE_TOKEN=hf_NauVHlQyFmxmsQWZuACsLrGdochRqwz
 1. Truy cập vào http://localhost:5000
 2. Tải lên hình ảnh sản phẩm trong phần "Phân loại sản phẩm"
 3. Nhập đánh giá khách hàng trong phần "Phân tích cảm xúc khách hàng"
+4. Hiển thị đề xuất sản phẩm sau khi người dùng phân loại hình ảnh
 
 ### API Endpoints
 
