@@ -223,8 +223,7 @@ GET /health
 Bạn có thể thay thế mô hình MobileNetV2 mặc định bằng mô hình tùy chỉnh:
 
 ```python
-# Trong image_service.py
 model = tf.keras.models.load_model('path/to/your/model')
 ```
 
-## ##Link Web Service đã Deploy lên Render (Đã bao gồm giao diện cho Client):https://e-commerce-e8m2.onrender.com/
+--Link Web Service đã Deploy lên Render (Đã bao gồm giao diện cho Client):https://e-commerce-e8m2.onrender.com/
