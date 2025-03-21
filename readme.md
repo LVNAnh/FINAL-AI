@@ -74,8 +74,8 @@ docker-compose up --build
 Hoặc sử dụng Docker trực tiếp:
 
 ```bash
-docker build -t product-analysis-platform .
-docker run -p 5000:5000 -e HUGGING_FACE_TOKEN=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 product-analysis-platform
+docker build -t final-api .
+docker run -p 5000:5000 -e HUGGING_FACE_TOKEN=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 final-api
 ```
 
 Ứng dụng sẽ chạy tại địa chỉ: http://localhost:5000
@@ -192,7 +192,7 @@ GET /health
 
 5. Cấu hình dịch vụ:
 
-   - **Name**: product-analysis-platform
+   - **Name**: FINAL-API
    - **Environment**: Docker
    - **Region**: Chọn khu vực phù hợp
    - Thiết lập biến môi trường:
