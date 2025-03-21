@@ -6,13 +6,11 @@ class SentimentAnalysisService:
     """Service for analyzing sentiment using Hugging Face API"""
     
     def __init__(self, api_token=None):
-        # Use provided token or get from environment variable
         self.api_token = api_token or os.environ.get("HUGGING_FACE_TOKEN")
         
         if not self.api_token:
             logging.warning("No Hugging Face API token provided. Sentiment analysis will not work.")
         
-        # Default model for sentiment analysis
         self.sentiment_model = "distilbert-base-uncased-finetuned-sst-2-english"
         self.headers = {"Authorization": f"Bearer {self.api_token}"}
         
@@ -39,20 +37,16 @@ class SentimentAnalysisService:
             api_url = self.get_api_url(model_name)
             payload = {"inputs": text}
             
-            # Make the API request
             response = requests.post(api_url, headers=self.headers, json=payload)
-            response.raise_for_status()  # Raise exception for HTTP errors
+            response.raise_for_status()  
             
             sentiment_data = response.json()
             
-            # Process and format the results
             if isinstance(sentiment_data, list) and len(sentiment_data) > 0:
                 result = sentiment_data[0]
                 
-                # Sort by confidence score
                 sentiments = sorted(result, key=lambda x: x['score'], reverse=True)
                 
-                # Map sentiment labels to more user-friendly terms
                 sentiment_mapping = {
                     "POSITIVE": "Positive",
                     "NEGATIVE": "Negative",
@@ -67,7 +61,6 @@ class SentimentAnalysisService:
                     for item in sentiments
                 ]
                 
-                # Determine overall sentiment
                 overall_sentiment = formatted_results[0]['sentiment']
                 
                 return {
