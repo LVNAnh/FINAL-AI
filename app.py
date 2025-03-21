@@ -18,7 +18,11 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://127.0.0.1:5500", "http://localhost:5500"]}})
+if os.environ.get('RENDER'):
+    CORS(app, resources={r"/*": {"origins": "*"}})
+else:
+    CORS(app, resources={r"/*": {"origins": ["http://127.0.0.1:5500", "http://localhost:5500"]}})
+
 
 HUGGING_FACE_TOKEN = os.environ.get("HUGGING_FACE_TOKEN", "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")
 SENTIMENT_API_URL = "https://api-inference.huggingface.co/models/distilbert-base-uncased-finetuned-sst-2-english"

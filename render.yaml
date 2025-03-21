@@ -9,4 +9,6 @@ services:
         value: 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
       - key: PORT
         value: 5000
+      - key: RENDER
+        value: true
     plan: free
