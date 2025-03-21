@@ -13,19 +13,19 @@ Nền tảng phân tích sản phẩm E-commerce tích hợp AI cho phép:
 - Phân tích tình cảm đánh giá khách hàng sử dụng Hugging Face API
 - Tìm kiếm và gợi ý sản phẩm từ các nền tảng thương mại điện tử phổ biến (Đang phát triển)
 
-## ✨ Tính năng
+## Tính năng
 
 - **🖼️ Phân loại hình ảnh sản phẩm**: Sử dụng mô hình TensorFlow MobileNetV2 để nhận dạng sản phẩm từ hình ảnh người dùng tải lên.
 - **📊 Phân tích đánh giá**: Phân tích tình cảm đánh giá khách hàng (tích cực, tiêu cực, trung tính) sử dụng Hugging Face API.
 - **🔍 Tìm kiếm sản phẩm tương tự**: Dựa trên kết quả phân loại hình ảnh, tìm kiếm sản phẩm tương tự trên các nền tảng thương mại điện tử. (Đang phát triển)
 - **📚 API Docs**: API documentation được tích hợp sẵn tại `/api/docs`.
 
-## 🔧 Yêu cầu
+## Yêu cầu
 
 - Python 3.10+
 - Docker (tùy chọn, nếu muốn chạy ứng dụng trong container)
 
-## 🚀 Cài đặt
+## Cài đặt
 
 ### Phương pháp 1: Sử dụng Python
 
@@ -80,7 +80,7 @@ docker run -p 5000:5000 -e HUGGING_FACE_TOKEN=hf_NauVHlQyFmxmsQWZuACsLrGdochRqwz
 
 Ứng dụng sẽ chạy tại địa chỉ: http://localhost:5000
 
-## 📱 Sử dụng
+## Sử dụng
 
 ### Giao diện web
 
@@ -172,7 +172,7 @@ GET /health
 }
 ```
 
-## 📁 Cấu trúc dự án
+## Cấu trúc dự án
 
 ```
 .
@@ -187,7 +187,7 @@ GET /health
     └── index.html         # Giao diện người dùng
 ```
 
-## 🌐 Triển khai lên Render
+## Triển khai lên Render
 
 1. Fork hoặc clone repository này và đẩy lên GitHub của bạn.
 
