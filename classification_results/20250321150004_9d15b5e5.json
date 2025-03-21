@@ -1,0 +1,22 @@
+{
+  "image_id": "20250321150004_9d15b5e5",
+  "success": true,
+  "predictions": [
+    {
+      "class_name": "Vacuum",
+      "class_id": "n04517823",
+      "confidence": 38.180699944496155
+    },
+    {
+      "class_name": "Espresso Maker",
+      "class_id": "n03297495",
+      "confidence": 2.978510782122612
+    },
+    {
+      "class_name": "Lawn Mower",
+      "class_id": "n03649909",
+      "confidence": 1.348238904029131
+    }
+  ],
+  "timestamp": "2025-03-21T15:00:04.319229"
+}

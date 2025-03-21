@@ -8,20 +8,30 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
       body {
         padding-top: 2rem;
         background-color: #f8f9fa;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
       .card {
         margin-bottom: 2rem;
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s;
+      }
+      .card:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
       }
       .card-header {
         background-color: #007bff;
         color: white;
         border-radius: 10px 10px 0 0 !important;
+        padding: 0.8rem 1.25rem;
       }
       .result-container {
         min-height: 200px;
@@ -41,6 +51,7 @@
         margin: 10px 0;
         border-radius: 5px;
         border: 1px solid #dee2e6;
+        object-fit: contain;
       }
       .loading {
         display: none;
@@ -50,6 +61,140 @@
       .loading-spinner {
         width: 3rem;
         height: 3rem;
+      }
+      .nav-tabs .nav-link {
+        color: #495057;
+        font-weight: 500;
+        padding: 0.75rem 1.25rem;
+        border: none;
+        border-bottom: 2px solid transparent;
+      }
+      .nav-tabs .nav-link.active {
+        color: #007bff;
+        font-weight: 600;
+        border-bottom: 3px solid #007bff;
+        background-color: transparent;
+      }
+      .nav-tabs .nav-link:hover:not(.active) {
+        border-bottom: 2px solid #dee2e6;
+      }
+      .product-card {
+        height: 100%;
+        transition: transform 0.3s, box-shadow 0.3s;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      .product-img {
+        height: 180px;
+        object-fit: contain;
+        margin: 0 auto;
+        display: block;
+        padding: 10px;
+        transition: transform 0.3s;
+      }
+      .product-card:hover .product-img {
+        transform: scale(1.05);
+      }
+      .product-title {
+        height: 50px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        font-size: 0.95rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+      .product-price {
+        font-weight: bold;
+        color: #e53935;
+        font-size: 1.1rem;
+      }
+      .original-price {
+        text-decoration: line-through;
+        color: #9e9e9e;
+        font-size: 0.9em;
+        margin-left: 0.5rem;
+      }
+      .platform-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 3px 10px;
+        border-radius: 12px;
+        font-size: 0.7em;
+        font-weight: bold;
+        z-index: 10;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .badge-shopee {
+        background-color: #fe5621;
+        color: white;
+      }
+      .badge-lazada {
+        background-color: #0f146e;
+        color: white;
+      }
+      .badge-tiki {
+        background-color: #1a94ff;
+        color: white;
+      }
+      #recommendProductsBtn {
+        display: none;
+        margin-top: 15px;
+        transition: all 0.3s;
+      }
+      #recommendProductsBtn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .classification-top {
+        background-color: #e3f2fd;
+        border-radius: 5px;
+        padding: 0.5rem 0.75rem;
+        margin-top: 10px;
+        border-left: 4px solid #2196f3;
+      }
+      .sold-badge {
+        font-size: 0.8rem;
+        color: #757575;
+        display: block;
+        margin-top: 0.25rem;
+      }
+      .rating-stars {
+        color: #ffc107;
+        margin-right: 0.25rem;
+      }
+      .product-details-btn {
+        background-color: #007bff;
+        border-color: #007bff;
+        transition: all 0.3s;
+        margin-top: 0.5rem;
+        border-radius: 4px;
+      }
+      .product-details-btn:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+        transform: translateY(-2px);
+      }
+      .section-title {
+        border-bottom: 2px solid #e9ecef;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+        color: #343a40;
+        font-weight: 600;
+      }
+      .no-products-found {
+        text-align: center;
+        padding: 2rem;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        margin: 1rem 0;
+        color: #6c757d;
       }
     </style>
   </head>
@@ -67,9 +212,9 @@
             <div class="card-body">
               <form id="imageForm" enctype="multipart/form-data">
                 <div class="mb-3">
-                  <label for="imageFile" class="form-label"
-                    >Upload a product image:</label
-                  >
+                  <label for="imageFile" class="form-label">
+                    <i class="fas fa-upload me-2"></i>Upload a product image:
+                  </label>
                   <input
                     type="file"
                     class="form-control"
@@ -91,7 +236,7 @@
                   />
                 </div>
                 <button type="submit" class="btn btn-primary w-100">
-                  Classify Image
+                  <i class="fas fa-magic me-2"></i>Classify Image
                 </button>
               </form>
 
@@ -110,8 +255,14 @@
                 class="result-container"
                 style="display: none"
               >
-                <h5>Classification Results:</h5>
+                <h5 class="section-title">
+                  <i class="fas fa-tag me-2"></i>Classification Results
+                </h5>
+                <div class="classification-top mb-3"></div>
                 <div id="imageResultContent"></div>
+                <button id="recommendProductsBtn" class="btn btn-success w-100">
+                  <i class="fas fa-search me-2"></i>Find Similar Products
+                </button>
               </div>
             </div>
           </div>
@@ -126,9 +277,10 @@
             <div class="card-body">
               <form id="sentimentForm">
                 <div class="mb-3">
-                  <label for="reviewText" class="form-label"
-                    >Enter customer review:</label
-                  >
+                  <label for="reviewText" class="form-label">
+                    <i class="fas fa-comment-alt me-2"></i>Enter customer
+                    review:
+                  </label>
                   <textarea
                     class="form-control"
                     id="reviewText"
@@ -137,7 +289,7 @@
                   ></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">
-                  Analyze Sentiment
+                  <i class="fas fa-heart me-2"></i>Analyze Sentiment
                 </button>
               </form>
 
@@ -156,9 +308,127 @@
                 class="result-container"
                 style="display: none"
               >
-                <h5>Sentiment Analysis Results:</h5>
+                <h5 class="section-title">
+                  <i class="fas fa-chart-pie me-2"></i>Sentiment Analysis
+                  Results
+                </h5>
                 <div id="sentimentResultContent"></div>
                 <div id="sentimentChart" class="mt-3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Recommendations Section -->
+      <div class="row mt-4" id="recommendationsSection" style="display: none">
+        <div class="col-12">
+          <div class="card">
+            <div
+              class="card-header d-flex justify-content-between align-items-center"
+            >
+              <h4 class="mb-0">
+                <i class="fas fa-shopping-basket me-2"></i>Similar Products
+              </h4>
+              <small class="text-light"
+                ><i class="fas fa-info-circle me-1"></i>Based on image
+                classification</small
+              >
+            </div>
+            <div class="card-body">
+              <div
+                id="recommendationsLoadingIndicator"
+                class="loading"
+                style="display: none"
+              >
+                <div
+                  class="spinner-border loading-spinner text-primary"
+                  role="status"
+                >
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+                <p>Finding similar products on e-commerce platforms...</p>
+              </div>
+
+              <ul class="nav nav-tabs mb-4" id="platformTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link active"
+                    id="all-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#all-products"
+                    type="button"
+                    role="tab"
+                    aria-controls="all-products"
+                    aria-selected="true"
+                  >
+                    <i class="fas fa-globe me-2"></i>All Platforms
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="shopee-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#shopee-products"
+                    type="button"
+                    role="tab"
+                    aria-controls="shopee-products"
+                    aria-selected="false"
+                  >
+                    <i class="fas fa-shopping-bag me-2"></i>Shopee
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="lazada-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#lazada-products"
+                    type="button"
+                    role="tab"
+                    aria-controls="lazada-products"
+                    aria-selected="false"
+                  >
+                    <i class="fas fa-box me-2"></i>Lazada
+                  </button>
+                </li>
+              </ul>
+
+              <div class="tab-content pt-2" id="platformTabsContent">
+                <div
+                  class="tab-pane fade show active"
+                  id="all-products"
+                  role="tabpanel"
+                  aria-labelledby="all-tab"
+                >
+                  <div
+                    id="allProductsContent"
+                    class="row row-cols-1 row-cols-md-3 g-4"
+                  ></div>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="shopee-products"
+                  role="tabpanel"
+                  aria-labelledby="shopee-tab"
+                >
+                  <div
+                    id="shopeeProductsContent"
+                    class="row row-cols-1 row-cols-md-3 g-4"
+                  ></div>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="lazada-products"
+                  role="tabpanel"
+                  aria-labelledby="lazada-tab"
+                >
+                  <div
+                    id="lazadaProductsContent"
+                    class="row row-cols-1 row-cols-md-3 g-4"
+                  ></div>
+                </div>
               </div>
             </div>
           </div>
@@ -168,6 +438,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+      // Global variables to store classification results
+      let currentClassificationResult = null;
+
       // Image preview functionality
       document
         .getElementById("imageFile")
@@ -203,6 +476,10 @@
           document.getElementById("imageLoadingIndicator").style.display =
             "block";
           document.getElementById("imageResults").style.display = "none";
+          document.getElementById("recommendProductsBtn").style.display =
+            "none";
+          document.getElementById("recommendationsSection").style.display =
+            "none";
 
           // Thay đổi URL API tại đây - sử dụng URL của máy chủ Flask
           fetch("http://localhost:5000/classify", {
@@ -219,7 +496,22 @@
                 document.getElementById(
                   "imageResultContent"
                 ).innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
+                document.getElementById("recommendProductsBtn").style.display =
+                  "none";
               } else {
+                // Store the classification result
+                currentClassificationResult = data;
+
+                // Display top classification
+                if (data.predictions && data.predictions.length > 0) {
+                  const topResult = data.predictions[0];
+                  document.querySelector(
+                    ".classification-top"
+                  ).innerHTML = `<strong>Top match:</strong> ${
+                    topResult.class_name
+                  } (${topResult.confidence.toFixed(2)}% confidence)`;
+                }
+
                 let resultsHtml = "";
                 data.predictions.forEach((pred) => {
                   const confidence = pred.confidence.toFixed(2);
@@ -231,21 +523,23 @@
                       : "bg-danger";
 
                   resultsHtml += `
-                            <div class="mb-3">
-                                <div class="d-flex justify-content-between">
-                                    <strong>${pred.class_name}</strong>
-                                    <span>${confidence}%</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar ${barColor}" role="progressbar" style="width: ${confidence}%" 
-                                        aria-valuenow="${confidence}" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        `;
+                    <div class="mb-3">
+                      <div class="d-flex justify-content-between">
+                        <strong>${pred.class_name}</strong>
+                        <span>${confidence}%</span>
+                      </div>
+                      <div class="progress">
+                        <div class="progress-bar ${barColor}" role="progressbar" style="width: ${confidence}%" 
+                          aria-valuenow="${confidence}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                  `;
                 });
 
                 document.getElementById("imageResultContent").innerHTML =
                   resultsHtml;
+                document.getElementById("recommendProductsBtn").style.display =
+                  "block";
               }
 
               document.getElementById("imageResults").style.display = "block";
@@ -257,8 +551,197 @@
                 "imageResultContent"
               ).innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
               document.getElementById("imageResults").style.display = "block";
+              document.getElementById("recommendProductsBtn").style.display =
+                "none";
             });
         });
+
+      // Product Recommendation Button
+      document
+        .getElementById("recommendProductsBtn")
+        .addEventListener("click", function () {
+          if (!currentClassificationResult) {
+            alert("Bạn cần phân loại ảnh trước khi tìm kiếm sản phẩm tương tự");
+            return;
+          }
+
+          // Show recommendations section
+          document.getElementById("recommendationsSection").style.display =
+            "block";
+          document.getElementById(
+            "recommendationsLoadingIndicator"
+          ).style.display = "block";
+
+          // Clear existing recommendations
+          document.getElementById("allProductsContent").innerHTML = "";
+          document.getElementById("shopeeProductsContent").innerHTML = "";
+          document.getElementById("lazadaProductsContent").innerHTML = "";
+
+          // Scroll to recommendations section
+          document
+            .getElementById("recommendationsSection")
+            .scrollIntoView({ behavior: "smooth" });
+
+          // Get recommendations from server
+          fetch("http://localhost:5000/recommend-products", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              classification_result: currentClassificationResult,
+              platforms: ["shopee", "lazada"],
+              num_products: 6,
+            }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              // Hide loading indicator
+              document.getElementById(
+                "recommendationsLoadingIndicator"
+              ).style.display = "none";
+
+              if (data.error) {
+                document.getElementById(
+                  "allProductsContent"
+                ).innerHTML = `<div class="col-12"><div class="alert alert-danger">${data.error}</div></div>`;
+                return;
+              }
+
+              // Process recommendations
+              const recommendations = data.recommendations;
+              let allProductsHtml = "";
+              let shopeeProductsHtml = "";
+              let lazadaProductsHtml = "";
+
+              // Process Shopee products
+              if (recommendations.shopee && recommendations.shopee.length > 0) {
+                recommendations.shopee.forEach((product) => {
+                  const productCard = createProductCard(product);
+                  allProductsHtml += productCard;
+                  shopeeProductsHtml += productCard;
+                });
+              } else {
+                shopeeProductsHtml = `
+                <div class="col-12">
+                  <div class="no-products-found">
+                    <i class="fas fa-search me-2"></i>Không tìm thấy sản phẩm từ Shopee
+                  </div>
+                </div>`;
+              }
+
+              // Process Lazada products
+              if (recommendations.lazada && recommendations.lazada.length > 0) {
+                recommendations.lazada.forEach((product) => {
+                  const productCard = createProductCard(product);
+                  allProductsHtml += productCard;
+                  lazadaProductsHtml += productCard;
+                });
+              } else {
+                lazadaProductsHtml = `
+                <div class="col-12">
+                  <div class="no-products-found">
+                    <i class="fas fa-search me-2"></i>Không tìm thấy sản phẩm từ Lazada
+                  </div>
+                </div>`;
+              }
+
+              // If no products found
+              if (allProductsHtml === "") {
+                allProductsHtml = `
+                <div class="col-12">
+                  <div class="no-products-found">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Không tìm thấy sản phẩm tương tự từ bất kỳ nền tảng nào
+                  </div>
+                </div>`;
+              }
+
+              // Update tab contents
+              document.getElementById("allProductsContent").innerHTML =
+                allProductsHtml;
+              document.getElementById("shopeeProductsContent").innerHTML =
+                shopeeProductsHtml;
+              document.getElementById("lazadaProductsContent").innerHTML =
+                lazadaProductsHtml;
+            })
+            .catch((error) => {
+              document.getElementById(
+                "recommendationsLoadingIndicator"
+              ).style.display = "none";
+              document.getElementById(
+                "allProductsContent"
+              ).innerHTML = `<div class="col-12"><div class="alert alert-danger">Error: ${error.message}</div></div>`;
+            });
+        });
+
+      // Function to create product card HTML
+      function createProductCard(product) {
+        const platformClass = `badge-${product.platform.toLowerCase()}`;
+        const soldText = product.sold
+          ? `<span class="sold-badge"><i class="fas fa-shopping-cart me-1"></i>${product.sold} đã bán</span>`
+          : "";
+        const originalPriceHtml = product.original_price
+          ? `<span class="original-price">${product.original_price}</span>`
+          : "";
+        const ratingStars = product.rating
+          ? createRatingStars(product.rating)
+          : "";
+
+        return `
+          <div class="col">
+            <div class="card product-card h-100">
+              <span class="platform-badge ${platformClass}">${product.platform}</span>
+              <img src="${product.image_url}" class="card-img-top p-2 product-img" alt="${product.name}" 
+                onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=Image+Not+Available';">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title product-title">${product.name}</h5>
+                <div class="mt-auto">
+                  <div class="d-flex align-items-center mb-1">
+                    <span class="product-price">${product.price}</span>
+                    ${originalPriceHtml}
+                  </div>
+                  ${ratingStars}
+                  ${soldText}
+                  <a href="${product.product_url}" target="_blank" class="btn btn-primary btn-sm w-100 product-details-btn">
+                    Xem chi tiết <i class="fas fa-external-link-alt ms-1"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Function to create rating stars
+      function createRatingStars(rating) {
+        const fullStars = Math.floor(rating);
+        const halfStar = rating % 1 >= 0.5;
+        const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+        let starsHtml = '<div class="mb-1">';
+
+        // Add full stars
+        for (let i = 0; i < fullStars; i++) {
+          starsHtml += '<i class="fas fa-star rating-stars"></i>';
+        }
+
+        // Add half star if needed
+        if (halfStar) {
+          starsHtml += '<i class="fas fa-star-half-alt rating-stars"></i>';
+        }
+
+        // Add empty stars
+        for (let i = 0; i < emptyStars; i++) {
+          starsHtml += '<i class="far fa-star rating-stars"></i>';
+        }
+
+        starsHtml += `<span class="text-muted small">(${rating.toFixed(
+          1
+        )})</span></div>`;
+
+        return starsHtml;
+      }
 
       // Sentiment Analysis Form Submission
       document
@@ -268,7 +751,7 @@
 
           const reviewText = document.getElementById("reviewText").value.trim();
           if (!reviewText) {
-            alert("Please enter a review to analyze");
+            alert("Vui lòng nhập đánh giá để phân tích");
             return;
           }
 
@@ -312,14 +795,14 @@
                 }
 
                 let resultsHtml = `
-                        <div class="alert alert-light">
-                            <h4 class="${sentimentClass}">
-                                ${sentimentIcon} Overall Sentiment: ${data.overall_sentiment}
-                            </h4>
-                            <p>Review: "${data.text}"</p>
-                        </div>
-                        <h6>Sentiment Breakdown:</h6>
-                    `;
+                  <div class="alert alert-light">
+                    <h4 class="${sentimentClass}">
+                      ${sentimentIcon} Overall Sentiment: ${data.overall_sentiment}
+                    </h4>
+                    <p>Review: "${data.text}"</p>
+                  </div>
+                  <h6>Sentiment Breakdown:</h6>
+                `;
 
                 data.details.forEach((item) => {
                   const confidence = item.confidence;
@@ -334,17 +817,17 @@
                   }
 
                   resultsHtml += `
-                            <div class="mb-2">
-                                <div class="d-flex justify-content-between">
-                                    <strong>${item.sentiment}</strong>
-                                    <span>${confidence}%</span>
-                                </div>
-                                <div class="progress">
-                                    <div class="progress-bar ${barColor}" role="progressbar" style="width: ${confidence}%" 
-                                        aria-valuenow="${confidence}" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        `;
+                    <div class="mb-2">
+                      <div class="d-flex justify-content-between">
+                        <strong>${item.sentiment}</strong>
+                        <span>${confidence}%</span>
+                      </div>
+                      <div class="progress">
+                        <div class="progress-bar ${barColor}" role="progressbar" style="width: ${confidence}%" 
+                          aria-valuenow="${confidence}" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                  `;
                 });
 
                 document.getElementById("sentimentResultContent").innerHTML =

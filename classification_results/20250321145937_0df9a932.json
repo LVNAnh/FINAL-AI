@@ -1,0 +1,22 @@
+{
+  "image_id": "20250321145937_0df9a932",
+  "success": true,
+  "predictions": [
+    {
+      "class_name": "Jersey",
+      "class_id": "n03595614",
+      "confidence": 91.80136919021606
+    },
+    {
+      "class_name": "Maillot",
+      "class_id": "n03710637",
+      "confidence": 1.5083655714988708
+    },
+    {
+      "class_name": "Kimono",
+      "class_id": "n03617480",
+      "confidence": 0.6368665955960751
+    }
+  ],
+  "timestamp": "2025-03-21T14:59:37.991063"
+}
