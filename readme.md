@@ -173,7 +173,6 @@ GET /health
 ├── Dockerfile             # Cấu hình Docker
 ├── docker-compose.yml     # Cấu hình Docker Compose
 ├── image_service.py       # Dịch vụ phân loại hình ảnh
-├── product_recommendation.py  # Dịch vụ gợi ý sản phẩm
 ├── requirements.txt       # Dependencies Python
 ├── sentiment_service.py   # Dịch vụ phân tích tình cảm
 └── templates/
