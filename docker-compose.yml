@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  product-analysis-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: product-analysis-platform
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./:/app
+    environment:
+      - HUGGING_FACE_TOKEN=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
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+    restart: unless-stopped
