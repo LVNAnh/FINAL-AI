@@ -15,10 +15,10 @@ Nền tảng phân tích sản phẩm E-commerce tích hợp AI cho phép:
 
 ## Tính năng
 
-- **🖼️ Phân loại hình ảnh sản phẩm**: Sử dụng mô hình TensorFlow MobileNetV2 để nhận dạng sản phẩm từ hình ảnh người dùng tải lên.
-- **📊 Phân tích đánh giá**: Phân tích tình cảm đánh giá khách hàng (tích cực, tiêu cực, trung tính) sử dụng Hugging Face API.
-- **🔍 Tìm kiếm sản phẩm tương tự**: Dựa trên kết quả phân loại hình ảnh, tìm kiếm sản phẩm tương tự trên các nền tảng thương mại điện tử. (Đang phát triển)
-- **📚 API Docs**: API documentation được tích hợp sẵn tại `/api/docs`.
+- **Phân loại hình ảnh sản phẩm**: Sử dụng mô hình TensorFlow MobileNetV2 để nhận dạng sản phẩm từ hình ảnh người dùng tải lên.
+- **Phân tích đánh giá**: Phân tích tình cảm đánh giá khách hàng (tích cực, tiêu cực, trung tính) sử dụng Hugging Face API.
+- **Tìm kiếm sản phẩm tương tự**: Dựa trên kết quả phân loại hình ảnh, tìm kiếm sản phẩm tương tự trên các nền tảng thương mại điện tử. (Đang phát triển)
+- **API Docs**: API documentation được tích hợp sẵn tại `/api/docs`.
 
 ## Yêu cầu
 
