@@ -1,0 +1,130 @@
+{
+  "laptop": [
+    {
+      "title": "Laptop - Premium Model",
+      "description": "High-performance laptop with 16GB RAM and 1TB SSD",
+      "price": 15000000,
+      "price_text": "15.000.000\u20ab",
+      "rating": 4.7,
+      "url": "#",
+      "image_url": "https://via.placeholder.com/150?text=Premium+Laptop",
+      "source": "Sample Data"
+    },
+    {
+      "title": "Laptop - Standard Edition",
+      "description": "Reliable laptop for everyday use with 8GB RAM",
+      "price": 9500000,
+      "price_text": "9.500.000\u20ab",
+      "rating": 4.3,
+      "url": "#",
+      "image_url": "https://via.placeholder.com/150?text=Standard+Laptop",
+      "source": "Sample Data"
+    },
+    {
+      "title": "Laptop - Budget Friendly",
+      "description": "Affordable laptop for basic computing needs",
+      "price": 5500000,
+      "price_text": "5.500.000\u20ab",
+      "rating": 4.0,
+      "url": "#",
+      "image_url": "https://via.placeholder.com/150?text=Budget+Laptop",
+      "source": "Sample Data"
+    }
+  ],
+  "smartphone": [
+    {
+      "title": "Smartphone - Premium Model",
+      "description": "Flagship smartphone with advanced camera system",
+      "price": 12000000,
+      "price_text": "12.000.000\u20ab",
+      "rating": 4.8,
+      "url": "#",
+      "image_url": "https://via.placeholder.com/150?text=Premium+Phone",
+      "source": "Sample Data"
+    },
+    {
+      "title": "Smartphone - Mid-range",
+      "description": "Great performance at a reasonable price",
+      "price": 6000000,
+      "price_text": "6.000.000\u20ab",
+      "rating": 4.5,
+      "url": "#",
+      "image_url": "https://via.placeholder.com/150?text=Midrange+Phone",
+      "source": "Sample Data"
+    },
+    {
+      "title": "Smartphone - Entry Level",
+      "description": "Affordable smartphone with essential features",
+      "price": 2500000,
+      "price_text": "2.500.000\u20ab",
+      "rating": 4.0,
+      "url": "#",
+      "image_url": "https://via.placeholder.com/150?text=Budget+Phone",
+      "source": "Sample Data"
+    }
+  ],
+  "espresso maker": [
+    {
+      "title": "M\u00e1y pha c\u00e0 ph\u00ea Espresso cao c\u1ea5p",
+      "description": "M\u00e1y pha c\u00e0 ph\u00ea espresso chuy\u00ean nghi\u1ec7p v\u1edbi \u00e1p su\u1ea5t 15 bar",
+      "price": 5500000,
+      "price_text": "5.500.000\u20ab",
+      "rating": 4.7,
+      "url": "#",
+      "image_url": "https://via.placeholder.com/150?text=Espresso+Maker",
+      "source": "Sample Data"
+    },
+    {
+      "title": "M\u00e1y pha c\u00e0 ph\u00ea Espresso t\u1ef1 \u0111\u1ed9ng",
+      "description": "M\u00e1y pha c\u00e0 ph\u00ea t\u1ef1 \u0111\u1ed9ng v\u1edbi ch\u1ee9c n\u0103ng nghi\u1ec1n h\u1ea1t",
+      "price": 8900000,
+      "price_text": "8.900.000\u20ab",
+      "rating": 4.5,
+      "url": "#",
+      "image_url": "https://via.placeholder.com/150?text=Auto+Espresso",
+      "source": "Sample Data"
+    },
+    {
+      "title": "M\u00e1y pha c\u00e0 ph\u00ea Espresso mini",
+      "description": "M\u00e1y pha c\u00e0 ph\u00ea espresso nh\u1ecf g\u1ecdn d\u00e0nh cho gia \u0111\u00ecnh",
+      "price": 2200000,
+      "price_text": "2.200.000\u20ab",
+      "rating": 4.2,
+      "url": "#",
+      "image_url": "https://via.placeholder.com/150?text=Mini+Espresso",
+      "source": "Sample Data"
+    }
+  ],
+  "coffee pot": [
+    {
+      "title": "B\u00ecnh \u0111un c\u00e0 ph\u00ea cao c\u1ea5p",
+      "description": "B\u00ecnh pha c\u00e0 ph\u00ea b\u1eb1ng th\u00e9p kh\u00f4ng g\u1ec9 dung t\u00edch 1 l\u00edt",
+      "price": 850000,
+      "price_text": "850.000\u20ab",
+      "rating": 4.5,
+      "url": "#",
+      "image_url": "https://via.placeholder.com/150?text=Coffee+Pot",
+      "source": "Sample Data"
+    },
+    {
+      "title": "B\u00ecnh \u0111un c\u00e0 ph\u00ea Moka Pot",
+      "description": "B\u00ecnh pha c\u00e0 ph\u00ea ki\u1ec3u \u00dd 300ml",
+      "price": 450000,
+      "price_text": "450.000\u20ab",
+      "rating": 4.3,
+      "url": "#",
+      "image_url": "https://via.placeholder.com/150?text=Moka+Pot",
+      "source": "Sample Data"
+    },
+    {
+      "title": "B\u1ed9 pha c\u00e0 ph\u00ea th\u1ee7y tinh",
+      "description": "B\u1ed9 pha c\u00e0 ph\u00ea ki\u1ec3u Pour Over b\u1eb1ng th\u1ee7y tinh",
+      "price": 650000,
+      "price_text": "650.000\u20ab",
+      "rating": 4.4,
+      "url": "#",
+      "image_url": "https://via.placeholder.com/150?text=Pour+Over",
+      "source": "Sample Data"
+    }
+  ]
+}

@@ -368,7 +368,6 @@ class ProductSearchService:
                 }
             ]
         else:
-            # Tạo dữ liệu mẫu chung cho các từ khóa khác
             price_ranges = [(1000000, 3000000), (3000000, 8000000), (8000000, 15000000)]
             
             for i in range(limit):
