@@ -170,14 +170,16 @@ GET /health
 
 ```
 .
-├── app.py                 # Ứng dụng Flask chính
-├── Dockerfile             # Cấu hình Docker
-├── docker-compose.yml     # Cấu hình Docker Compose
-├── image_service.py       # Dịch vụ phân loại hình ảnh
-├── requirements.txt       # Dependencies Python
-├── sentiment_service.py   # Dịch vụ phân tích tình cảm
+├── app.py                    # Ứng dụng Flask chính
+├── render.yaml               # Cấu hình để deploy lên render
+├── Dockerfile                # Cấu hình Docker
+├── docker-compose.yml        # Cấu hình Docker Compose
+├── image_service.py          # Logic phân loại ảnh
+├── product_search_service.py # Logic đề xuất sản phẩm
+├── requirements.txt          # Dependencies Python
+├── sentiment_service.py      # Logic phân tích cảm xúc qua review
 └── templates/
-    └── index.html         # Giao diện người dùng
+    └── index.html            # Giao diện người dùng
 ```
 
 ## Triển khai lên Render
