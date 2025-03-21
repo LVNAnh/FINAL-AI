@@ -146,26 +146,6 @@ POST /analyze-sentiment
 }
 ```
 
-#### Kiểm tra trạng thái
-
-```http
-GET /health
-```
-
-**Response:**
-
-```json
-{
-  "status": "healthy",
-  "services": {
-    "image_classification": true,
-    "sentiment_analysis": true,
-    "labels_loaded": true
-  },
-  "version": "1.0.0"
-}
-```
-
 ## Cấu trúc dự án
 
 ```
@@ -184,25 +164,7 @@ GET /health
 
 ## Triển khai lên Render
 
-1. Fork hoặc clone repository này và đẩy lên GitHub của bạn.
-
-2. Đăng ký tài khoản tại [Render](https://render.com/).
-
-3. Trong Render Dashboard, chọn "New" > "Web Service".
-
-4. Kết nối với repository GitHub của bạn.
-
-5. Cấu hình dịch vụ:
-
-   - **Name**: FINAL-AI
-   - **Environment**: Docker
-   - **Region**: Chọn khu vực phù hợp
-   - Thiết lập biến môi trường:
-     - `HUGGING_FACE_TOKEN`: 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
-     - `PORT`: 5000
-
-6. Click "Create Web Service".
-7. Link Web Service đã Deploy lên Render :https://e-commerce-e8m2.onrender.com/
+1. Link Web Service đã Deploy lên Render :https://e-commerce-e8m2.onrender.com/
 
 ```
 
