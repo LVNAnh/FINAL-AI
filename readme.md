@@ -202,5 +202,5 @@ GET /health
 
 ```
 
-Link Web Service đã Deploy lên Render (Đã bao gồm giao diện cho Client):(https://e-commerce-e8m2.onrender.com/)
+Link Web Service đã Deploy lên Render (Đã bao gồm giao diện cho Client):[Link](https://e-commerce-e8m2.onrender.com/)
 ```
