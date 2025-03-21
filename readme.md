@@ -227,7 +227,4 @@ Bạn có thể thay thế mô hình MobileNetV2 mặc định bằng mô hình 
 model = tf.keras.models.load_model('path/to/your/model')
 ```
 
----
-
-<p align="center">Made with ❤️ for AI-powered E-commerce</p>
-##Link Web Service đã Deploy lên Render (Đã bao gồm giao diện cho Client):https://e-commerce-e8m2.onrender.com/
+## ##Link Web Service đã Deploy lên Render (Đã bao gồm giao diện cho Client):https://e-commerce-e8m2.onrender.com/
