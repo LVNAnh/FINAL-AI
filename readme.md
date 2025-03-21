@@ -4,7 +4,6 @@
   <img src="https://img.shields.io/badge/Python-3.10+-blue.svg" alt="Python Version">
   <img src="https://img.shields.io/badge/TensorFlow-2.13.0-orange.svg" alt="TensorFlow Version">
   <img src="https://img.shields.io/badge/Flask-2.3.3-lightgrey.svg" alt="Flask Version">
-  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
 </p>
 
 Nền tảng phân tích sản phẩm E-commerce tích hợp AI cho phép:
