@@ -552,9 +552,9 @@ def analyze_sentiment():
             sentiments = sorted(result, key=lambda x: x['score'], reverse=True)
             
             sentiment_mapping = {
-                "POSITIVE": "Tích cực",
-                "NEGATIVE": "Tiêu cực",
-                "NEUTRAL": "Trung lập"
+                "POSITIVE": "Positive",
+                "NEGATIVE": "Negative",
+                "NEUTRAL": "Neutral"
             }
             
             formatted_results = [
