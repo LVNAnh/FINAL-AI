@@ -74,8 +74,8 @@ docker-compose up --build
 Hoặc sử dụng Docker trực tiếp:
 
 ```bash
-docker build -t final-api .
-docker run -p 5000:5000 -e HUGGING_FACE_TOKEN=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 final-api
+docker build -t final-ai .
+docker run -p 5000:5000 -e HUGGING_FACE_TOKEN=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 final-ai
 ```
 
 Ứng dụng sẽ chạy tại địa chỉ: http://localhost:5000
@@ -192,7 +192,7 @@ GET /health
 
 5. Cấu hình dịch vụ:
 
-   - **Name**: FINAL-API
+   - **Name**: FINAL-AI
    - **Environment**: Docker
    - **Region**: Chọn khu vực phù hợp
    - Thiết lập biến môi trường:
