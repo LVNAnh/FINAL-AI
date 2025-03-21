@@ -208,13 +208,7 @@ GET /health
 
 6. Click "Create Web Service".
 
-<details>
-<summary>👉 Xem hình ảnh hướng dẫn chi tiết</summary>
-<br>
-<p align="center">
-  <img src="https://via.placeholder.com/800x500?text=Render+Deployment+Guide" alt="Render Deployment Guide">
-</p>
-</details>
 ```
 
 --Link Web Service đã Deploy lên Render (Đã bao gồm giao diện cho Client):https://e-commerce-e8m2.onrender.com/
+```
