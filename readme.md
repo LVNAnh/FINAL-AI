@@ -88,13 +88,6 @@ docker run -p 5000:5000 -e HUGGING_FACE_TOKEN=hf_NauVHlQyFmxmsQWZuACsLrGdochRqwz
 2. Tải lên hình ảnh sản phẩm trong phần "Phân loại sản phẩm"
 3. Nhập đánh giá khách hàng trong phần "Phân tích cảm xúc khách hàng"
 
-<details>
-<br>
-<p align="center">
-  <img src="https://via.placeholder.com/800x400?text=Product+Analysis+Platform+Demo" alt="Demo Screenshot">
-</p>
-</details>
-
 ### API Endpoints
 
 #### Phân loại hình ảnh
