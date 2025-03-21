@@ -165,7 +165,3 @@ POST /analyze-sentiment
 ## Triển khai lên Render
 
 1. Link Web Service đã Deploy lên Render :https://e-commerce-e8m2.onrender.com/
-
-```
-
-```
