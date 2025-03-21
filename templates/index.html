@@ -201,7 +201,7 @@
             "block";
           document.getElementById("imageResults").style.display = "none";
 
-          fetch("/classify", {
+          fetch("http://localhost:5000/classify", {
             method: "POST",
             body: formData,
           })
@@ -270,7 +270,7 @@
             "block";
           document.getElementById("sentimentResults").style.display = "none";
 
-          fetch("/analyze-sentiment", {
+          fetch("http://localhost:5000/analyze-sentiment", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
