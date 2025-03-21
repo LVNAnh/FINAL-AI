@@ -192,6 +192,33 @@ def analyze_sentiment():
         logger.error(f"Error in sentiment analysis: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
+@app.route('/recommend-products', methods=['POST'])
+def recommend_products():
+    """Endpoint for recommending products based on image classification results"""
+    try:
+        data = request.json
+        if not data or 'predictions' not in data:
+            return jsonify({"error": "Không có kết quả phân loại được cung cấp"}), 400
+            
+        # Import the product recommendation service
+        from product_recommendation import EcommerceProductRecommendation
+        
+        # Initialize the recommendation service
+        recommender = EcommerceProductRecommendation()
+        
+        # Get recommendations based on the classification results
+        recommendations = recommender.get_product_recommendations(
+            classification_result=data,
+            num_products=6,  # Number of products to recommend
+            platforms=["shopee", "lazada"]  # Platforms to search
+        )
+        
+        return jsonify(recommendations)
+    
+    except Exception as e:
+        logger.error(f"Error in product recommendation: {str(e)}")
+        return jsonify({"error": str(e)}), 500
+
 @app.route('/health', methods=['GET'])
 def health_check():
     """Endpoint for checking the health of the application"""
@@ -253,6 +280,19 @@ def api_docs():
                 ]
             },
             {
+                "path": "/recommend-products",
+                "method": "POST",
+                "description": "Get product recommendations based on image classification",
+                "parameters": [
+                    {
+                        "name": "predictions",
+                        "type": "array",
+                        "required": True,
+                        "description": "Classification results from /classify endpoint"
+                    }
+                ]
+            },
+            {
                 "path": "/health",
                 "method": "GET",
                 "description": "Health check endpoint"
@@ -262,11 +302,10 @@ def api_docs():
     return jsonify(docs)
 
 if __name__ == '__main__':
-    # Log startup information
     logger.info("Starting Product Analysis Platform")
     logger.info(f"Image classification model loaded: {model is not None}")
     logger.info(f"Labels loaded: {len(labels)} labels available")
     logger.info(f"Hugging Face API token configured: {HUGGING_FACE_TOKEN is not None}")
     
-    # Run the Flask application
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=False)

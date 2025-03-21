@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: product-analysis-platform
+    env: docker
+    repo: https://github.com/yourusername/your-repo-name # Đổi thành URL GitHub của bạn
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: HUGGING_FACE_TOKEN
+        value: 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
+      - key: PORT
+        value: 5000
+    plan: free
