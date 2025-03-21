@@ -215,15 +215,6 @@ GET /health
   <img src="https://via.placeholder.com/800x500?text=Render+Deployment+Guide" alt="Render Deployment Guide">
 </p>
 </details>
-
-## ⚙️ Cấu hình nâng cao
-
-### Sử dụng mô hình tùy chỉnh
-
-Bạn có thể thay thế mô hình MobileNetV2 mặc định bằng mô hình tùy chỉnh:
-
-```python
-model = tf.keras.models.load_model('path/to/your/model')
 ```
 
 --Link Web Service đã Deploy lên Render (Đã bao gồm giao diện cho Client):https://e-commerce-e8m2.onrender.com/
