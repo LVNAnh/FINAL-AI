@@ -15,7 +15,6 @@ class ProductSearchService:
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
             "Accept-Language": "en-US,en;q=0.9,vi;q=0.8"
         }
-        # Thời gian timeout cho requests
         self.timeout = 10
         
     def search_products(self, query, max_results=6):
@@ -33,9 +32,7 @@ class ProductSearchService:
         
         all_products = []
         
-        # Thử tìm kiếm trên nhiều nền tảng khác nhau
         try:
-            # Tìm trên Shopee
             shopee_products = self.search_shopee(query)
             if shopee_products:
                 all_products.extend(shopee_products)
@@ -44,7 +41,6 @@ class ProductSearchService:
             self.logger.error(f"Lỗi khi tìm trên Shopee: {str(e)}")
         
         try:
-            # Tìm trên Tiki
             tiki_products = self.search_tiki(query)
             if tiki_products:
                 all_products.extend(tiki_products)
@@ -53,7 +49,6 @@ class ProductSearchService:
             self.logger.error(f"Lỗi khi tìm trên Tiki: {str(e)}")
         
         try:
-            # Tìm trên Lazada
             lazada_products = self.search_lazada(query)
             if lazada_products:
                 all_products.extend(lazada_products)
@@ -61,7 +56,6 @@ class ProductSearchService:
         except Exception as e:
             self.logger.error(f"Lỗi khi tìm trên Lazada: {str(e)}")
             
-        # Nếu không tìm thấy sản phẩm nào, thử tìm kiếm trên Google Shopping
         if not all_products:
             try:
                 google_products = self.search_google_shopping(query)
@@ -71,7 +65,6 @@ class ProductSearchService:
             except Exception as e:
                 self.logger.error(f"Lỗi khi tìm trên Google Shopping: {str(e)}")
         
-        # Giới hạn số lượng kết quả
         return all_products[:max_results]
     
     def search_shopee(self, query, limit=3):
@@ -79,19 +72,15 @@ class ProductSearchService:
         products = []
         
         try:
-            # URL tìm kiếm Shopee
             search_url = f"https://shopee.vn/search?keyword={quote_plus(query)}"
             
             response = requests.get(search_url, headers=self.headers, timeout=self.timeout)
             soup = BeautifulSoup(response.text, 'html.parser')
             
-            # Shopee sử dụng JavaScript để render nội dung, nên cách này có thể không hoạt động tốt
-            # Các selector này cần được cập nhật thường xuyên khi Shopee thay đổi giao diện
             product_items = soup.select('.shopee-search-item-result__item')
             
             for item in product_items[:limit]:
                 try:
-                    # Trích xuất thông tin sản phẩm
                     name_element = item.select_one('.shopee-item-card__text-name')
                     price_element = item.select_one('.shopee-item-card__current-price')
                     link_element = item.select_one('a[href]')
@@ -101,16 +90,13 @@ class ProductSearchService:
                         name = name_element.text.strip()
                         price_text = price_element.text.strip()
                         
-                        # Xử lý giá
                         price_match = re.search(r'[\d.,]+', price_text)
                         price = price_match.group(0).replace('.', '') if price_match else "Liên hệ"
                         
-                        # Xử lý đường dẫn
                         link = link_element.get('href')
                         if link and not link.startswith('http'):
                             link = f"https://shopee.vn{link}"
-                            
-                        # Xử lý hình ảnh
+                        
                         image_url = ""
                         if image_element:
                             image_url = image_element.get('src') or image_element.get('data-src', '')
@@ -139,18 +125,15 @@ class ProductSearchService:
         products = []
         
         try:
-            # URL tìm kiếm Tiki
             search_url = f"https://tiki.vn/search?q={quote_plus(query)}"
             
             response = requests.get(search_url, headers=self.headers, timeout=self.timeout)
             soup = BeautifulSoup(response.text, 'html.parser')
             
-            # Tìm các phần tử sản phẩm
             product_items = soup.select('div[data-view-id="product_list_container"] > div')
             
             for item in product_items[:limit]:
                 try:
-                    # Trích xuất thông tin sản phẩm
                     name_element = item.select_one('div[class*="info"] > div[class*="name"]')
                     price_element = item.select_one('div[class*="price-discount__price"]')
                     link_element = item.select_one('a[href]')
@@ -160,16 +143,13 @@ class ProductSearchService:
                         name = name_element.text.strip()
                         price_text = price_element.text.strip()
                         
-                        # Xử lý giá
                         price_match = re.search(r'[\d.,]+', price_text)
                         price = price_match.group(0).replace('.', '') if price_match else "Liên hệ"
                         
-                        # Xử lý đường dẫn
                         link = link_element.get('href')
                         if link and not link.startswith('http'):
                             link = f"https://tiki.vn{link}"
                             
-                        # Xử lý hình ảnh
                         image_url = ""
                         if image_element:
                             image_url = image_element.get('src', '')
@@ -198,19 +178,15 @@ class ProductSearchService:
         products = []
         
         try:
-            # URL tìm kiếm Lazada
             search_url = f"https://www.lazada.vn/catalog/?q={quote_plus(query)}"
             
             response = requests.get(search_url, headers=self.headers, timeout=self.timeout)
             soup = BeautifulSoup(response.text, 'html.parser')
             
-            # Lazada sử dụng JavaScript để render nội dung, nên cách này có thể không hoạt động tốt
-            # Các selector này cần được cập nhật thường xuyên khi Lazada thay đổi giao diện
             product_items = soup.select('.Bm3ON')
             
             for item in product_items[:limit]:
                 try:
-                    # Trích xuất thông tin sản phẩm
                     name_element = item.select_one('.RfADt')
                     price_element = item.select_one('.aBrP0')
                     link_element = item.select_one('a[href]')
@@ -222,14 +198,13 @@ class ProductSearchService:
                         
                         link = link_element.get('href')
                         
-                        # Xử lý hình ảnh
                         image_url = ""
                         if image_element:
                             image_url = image_element.get('src', '')
                         
                         products.append({
                             'title': name,
-                            'price': "Xem trên trang",  # Lazada thường hiển thị giá theo định dạng phức tạp
+                            'price': "Xem trên trang", 
                             'price_text': price_text,
                             'url': link,
                             'image_url': image_url,
@@ -251,18 +226,15 @@ class ProductSearchService:
         products = []
         
         try:
-            # URL tìm kiếm Google Shopping
             search_url = f"https://www.google.com/search?q={quote_plus(query)}&tbm=shop"
             
             response = requests.get(search_url, headers=self.headers, timeout=self.timeout)
             soup = BeautifulSoup(response.text, 'html.parser')
             
-            # Tìm các phần tử sản phẩm
             product_items = soup.select('.sh-dgr__grid-result')
             
             for item in product_items[:limit]:
                 try:
-                    # Trích xuất thông tin sản phẩm
                     name_element = item.select_one('.Xjkr3b')
                     price_element = item.select_one('.a8Pemb')
                     merchant_element = item.select_one('.aULzUe')
@@ -273,17 +245,14 @@ class ProductSearchService:
                         name = name_element.text.strip()
                         price_text = price_element.text.strip()
                         
-                        # Trích xuất merchant nếu có
                         merchant = ""
                         if merchant_element:
                             merchant = merchant_element.text.strip()
                             
-                        # Xử lý đường dẫn
                         link = link_element.get('href')
                         if link and link.startswith('/'):
                             link = f"https://www.google.com{link}"
                             
-                        # Xử lý hình ảnh
                         image_url = ""
                         if image_element:
                             image_url = image_element.get('src', '')
@@ -296,7 +265,6 @@ class ProductSearchService:
                             'source': f'Google Shopping{f" - {merchant}" if merchant else ""}'
                         }
                         
-                        # Xử lý giá nếu có thể
                         price_match = re.search(r'[\d.,]+', price_text)
                         if price_match:
                             try:
@@ -330,10 +298,8 @@ class ProductSearchService:
         Returns:
             list: Danh sách sản phẩm mẫu
         """
-        # Tạo dữ liệu mẫu theo từ khóa
         sample_products = []
         
-        # Dựa vào từ khóa để tạo dữ liệu mẫu phù hợp
         if "espresso" in query.lower() or "coffee" in query.lower():
             sample_products = [
                 {
