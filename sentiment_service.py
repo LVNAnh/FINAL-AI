@@ -48,9 +48,9 @@ class SentimentAnalysisService:
                 sentiments = sorted(result, key=lambda x: x['score'], reverse=True)
                 
                 sentiment_mapping = {
-                    "POSITIVE": "Positive",
-                    "NEGATIVE": "Negative",
-                    "NEUTRAL": "Neutral"
+                    "POSITIVE": "Tích cực",
+                    "NEGATIVE": "Tiêu cực",
+                    "NEUTRAL": "Trung lập"
                 }
                 
                 formatted_results = [
